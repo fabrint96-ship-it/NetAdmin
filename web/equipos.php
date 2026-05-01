@@ -1,36 +1,94 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Equipos - NetAdmin</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="sidebar">
-        <h2>NetAdmin</h2>
-        <a href="dashboard.php">Inicio</a>
-        <a href="equipos.php">Equipos</a>
-        <a href="logout.php">Salir</a>
+<? php include 'includes/header.php';?>
+<? php include 'includes/sidebar.php';?>
+
+<div class="main">
+    <div class="page-header">
+        <h1> Gestion de equipos</h1>
+        <p> Inventario local de dispositivos de red</p>
     </div>
 
-    <div class="main">
-        <h1>Gestión de equipos</h1>
+    <div class="panel">
+        <h2> añadir equipos</h2>
 
-        <form>
+        <form class="form-grid">
             <input type="text" placeholder="Nombre del equipo">
-            <input type="text" placeholder="IP">
-            <input type="text" placeholder="Tipo">
-            <input type="text" placeholder="Ubicación">
-            <button type="submit">Añadir equipo</button>
+            <input type="text" placeholder="Direccion IP">
+            <input type="text" placeholder="Tipo de equipo">
+            <input type="text" placeholder="Sistema Operativo">
+            <input type="text" placeholder="Ubicacion">
+
+
+            <select>
+                <option> Activo</option>
+                <option> Mantenimiento</option>
+                <option> Inactivo</option>
+            </select>
+
+            <button type="submit">Añadir equipos</button>
         </form>
+    </div>
+
+
+    <div class="panel">
+        <h2> Lista de equipos</h2>
 
         <input type="text" id="buscar" placeholder="Buscar equipo...">
 
-        <div class="card">PC-01 - 192.168.1.10</div>
-        <div class="card">SRV-01 - 192.168.1.20</div>
-        <div class="card">RTR-01 - 192.168.1.1</div>
-    </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>IP</th>
+                    <th>Tipo</th>
+                    <th>Sistema Operativo</th>
+                    <th>Ubicacion</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
 
-    <script src="app.js"></script>
-</body>
-</html>
+            <tbody>
+                <tr class="fila-equipo">
+                    <td> SRV-AD-01 </td>
+                    <td>192.168.1.10</td>
+                    <td>Servidor></td>
+                    <td> Windows Server</td>
+                    <td>CPD</td>
+                    <td><span class="badge activo">Activo</span></td>
+                    <td>
+                        <a href="#">Editar</a>
+                        <a href="#" class="delete-lonk">Eliminar</a>
+                    </td>
+                </tr>
+
+                <tr class="fila-equipo">
+                    <td>RTR-CORE-01</td>
+                    <td>192.1687.1.1.</td>
+                    <td>Router</td>
+                    <td>Cisco IOS</td>
+                    <td> Rack principal</td>
+                    <td><span class="badge activo">Activo</span></td>
+                    <td>
+                        <a href="#">Editar</a>
+                        <a href="#" class="delete-link">Eliminar</a>
+                    </td>
+                </tr>
+
+                <tr class=fila-equipo>
+                    <td>PC-ADMIN-01</td>
+                    <td>192.168.1.50</td>
+                    <td>PC</td>
+                    <td>Windows 10</td>
+                    <td>Oficina tecnica </td>
+                    <td><span class="badge mantenimiento">Mantenimiento</span></td>
+                    <td>
+                        <a href="#">Editar</a>
+                        <a href="#" class="delete-link">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<?php include 'includes/footer.php';?>
