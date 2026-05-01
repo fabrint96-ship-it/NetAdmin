@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Login - NetAdmin</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Iniciar sesión</h2>
+<?php include 'includes/header.php';?>
+
+
+<div class="login-page">
+    <div class="login-card">
+        <h1>NetAdmin</h1>
+        <h2>Inicio de Sesion</h2>
         <form action="dashboard.php" method="POST">
-            <input type="text" name="username" placeholder="Usuario" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Entrar</button>
+            <label>Usuario></label>
+            <input type="text" name="username" placeholder="intoduce tu usuario" required>
+            <label>Contraseña</label>
+            <input type="password" name="password" placeholder="introduce tu contraseña" required>
+            <button  type="submit"> Entrar</button>
         </form>
+
+        <p class="small-text">Sistema local de administracion de red</p>
     </div>
-</body>
-</html>
+</div>
+
+<?php include 'includes/footer.php';?>
