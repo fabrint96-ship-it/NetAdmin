@@ -1,41 +1,38 @@
-<?php include 'includes/header.php';?>
-<?php include 'includes/sidebar.php';?>
-
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
 
 <div class="main">
-    <div class="page-header">
-        <h1>Dashboard</h1>
-        <p>Panel principal de NEtADmin Web</p>
-    </div>
-
+    <h1>Dashboard</h1>
+    <p>Panel principal de administración de red.</p>
 
     <div class="cards">
         <div class="card">
-            <h3> Equipos</h3>
-            <p class="number">3</p>
-            <span> Dispositivos registrados</span>
+            <h3>Equipos</h3>
+            <p>0 registrados</p>
         </div>
 
         <div class="card">
-            <h3> Servicios</h3>
-            <p class="number">4</p>
-            <span> Servicios de red </span>
+            <h3>Servicios</h3>
+            <p>0 activos</p>
         </div>
 
+        <div class="card">
+            <h3>Incidencias</h3>
+            <p>0 abiertas</p>
+        </div>
 
         <div class="card">
-            <h3> incidencias </h3>
-            <p class="number">OK</p>
-            <spam> Sistema de respaldo</spam>
+            <h3>Backups</h3>
+            <p>Pendiente</p>
         </div>
     </div>
 
-
     <div class="panel">
-        <h2> Estado general</h2>
-        <p> El sistema esta preparando para gestionar equipos, servicios, incidencias y copias de seguridad en entorno local</p>
+        <h2>Estado del sistema</h2>
+        <p>Aplicación funcionando en entorno local.</p>
+        <p>Servidor web: Apache</p>
+        <p>Base de datos: MySQL</p>
     </div>
 </div>
 
-<?php include 'includes/footer.php';?>
-
+<?php include 'includes/footer.php'; ?>

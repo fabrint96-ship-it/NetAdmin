@@ -1,60 +1,38 @@
-<?php include 'includes/header.php';?>
-<?php include 'includes/sidebar.php';?>
-
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
 
 <div class="main">
-    <div class="page-header">
-        <h1>Servicios</h1>
-        <p>Gestiona los servicios asociados a la red </p>
-    </div>
+    <h1>Servicios</h1>
 
-    <div class="panel">
-        <h2>Servicios registrados</h2>
+    <form class="form-grid">
+        <input type="text" placeholder="Nombre del servicio">
+        <input type="number" placeholder="Puerto">
+        <select>
+            <option>TCP</option>
+            <option>UDP</option>
+        </select>
+        <input type="text" placeholder="Equipo asociado">
+        <button type="submit">Añadir servicio</button>
+    </form>
 
-
-        <table>
-            <thead>
-                <tr>
-                    <th> Servicio</th>
-                    <th>Puerto</th>
-                    <th>Protocolo</th>
-                    <th>Equipo</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>HTTP</td>
-                    <td>80</td>
-                    <td>TCP</td>
-                    <td>SRV-WEB-01</td>
-                    <td><span class="badge activo">Activo</span></td>
-                </tr>
-
-                <tr>
-                    <td>DNS</td>
-                    <td>53</td>
-                    <td>UDP/TCP</td>
-                    <td>SRV-DNS-01</td>
-                    <td><span class="badge activo">Activo</span></td>
-                </tr>
-
-                <tr>
-                    <td>SSH</td>
-                    <td>22</td>
-                    <td>TCP</td>
-                    <td>SRV-AD-01</td>
-                    <td><span class="badge mantenimiento">Mantenimiento</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Servicio</th>
+                <th>Puerto</th>
+                <th>Protocolo</th>
+                <th>Equipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>HTTP</td>
+                <td>80</td>
+                <td>TCP</td>
+                <td>SRV-WEB-01</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<?php include 'includes/footer.php';?>
-                
-               
-
-
-
+<?php include 'includes/footer.php'; ?>
