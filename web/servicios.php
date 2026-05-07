@@ -45,6 +45,8 @@ $result = $conn->query($sql);
         <button type="submit">Añadir servicio</button>
     </form>
 
+    <input type="text" id="buscar" placeholder="Buscar servicio...">
+
     <table>
         <thead>
             <tr>
@@ -54,18 +56,23 @@ $result = $conn->query($sql);
                 <th>Protocolo</th>
                 <th>Equipo</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
         <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
+                <tr class="fila-busqueda">
                     <td><?php echo limpiar($row['id']); ?></td>
                     <td><?php echo limpiar($row['nombre']); ?></td>
                     <td><?php echo limpiar($row['puerto']); ?></td>
                     <td><?php echo limpiar($row['protocolo']); ?></td>
                     <td><?php echo limpiar($row['equipo_nombre'] ?? 'Sin asignar'); ?></td>
                     <td><?php echo limpiar($row['estado']); ?></td>
+                    <td>
+                        <a href="edit_servicio.php?id=<?php echo $row['id']; ?>">Editar</a> |
+                        <a href="delete_servicio.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar este servicio?');">Eliminar</a>
+                    </td>
                 </tr>
             <?php endwhile; ?>
         </tbody>

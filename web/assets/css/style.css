@@ -49,6 +49,7 @@ body {
 .sidebar h2 {
     margin-top: 0;
     margin-bottom: 25px;
+    font-size: 32px;
 }
 
 .sidebar a {
@@ -58,6 +59,7 @@ body {
     margin: 12px 0;
     padding: 10px;
     border-radius: 8px;
+    font-size: 20px;
 }
 
 .sidebar a:hover {
@@ -68,6 +70,148 @@ body {
     margin-left: 250px;
     padding: 32px;
 }
+
+.main h1 {
+    font-size: 44px;
+    margin-bottom: 20px;
+}
+
+.main > p {
+    font-size: 22px;
+}
+
+/* Dashboard PRO */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.dashboard-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #1e293b;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: 0.25s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.card-icon {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    flex-shrink: 0;
+}
+
+.card-content {
+    flex: 1;
+    margin-left: 25px;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 28px;
+    text-decoration: none;
+    color: #1e293b;
+}
+
+.card-content p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.card-arrow {
+    font-size: 60px;
+    opacity: 0.6;
+}
+
+.equipos-card {
+    background: #eef4ff;
+    border: 1px solid #bfd7ff;
+}
+
+.equipos-card .card-icon {
+    background: #2563eb;
+}
+
+.equipos-card .card-content p,
+.equipos-card .card-arrow {
+    color: #2563eb;
+}
+
+.servicios-card {
+    background: #edf9ee;
+    border: 1px solid #c5e8c8;
+}
+
+.servicios-card .card-icon {
+    background: #16a34a;
+}
+
+.servicios-card .card-content p,
+.servicios-card .card-arrow {
+    color: #16a34a;
+}
+
+.incidencias-card {
+    background: #fff8e7;
+    border: 1px solid #ffe39c;
+}
+
+.incidencias-card .card-icon {
+    background: #f59e0b;
+}
+
+.incidencias-card .card-content p,
+.incidencias-card .card-arrow {
+    color: #f59e0b;
+}
+
+.logs-card {
+    background: #f5efff;
+    border: 1px solid #dccbff;
+}
+
+.logs-card .card-icon {
+    background: #7c3aed;
+}
+
+.logs-card .card-content p,
+.logs-card .card-arrow {
+    color: #7c3aed;
+}
+
+.info-panel {
+    margin-top: 35px;
+    background: #eef4ff;
+    border: 1px solid #bfd7ff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.info-panel h3 {
+    margin-top: 0;
+    color: #2563eb;
+}
+
+/* Formularios, tablas y módulos */
 
 .cards {
     display: flex;
@@ -82,17 +226,6 @@ body {
     border-radius: 14px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     min-width: 190px;
-}
-
-.card h3 {
-    margin-top: 0;
-    color: #1e293b;
-}
-
-.card p {
-    font-size: 20px;
-    font-weight: bold;
-    color: #2563eb;
 }
 
 .panel {
@@ -176,4 +309,9 @@ table a {
 
 table a:hover {
     text-decoration: underline;
+}
+
+.error {
+    color: #c62828;
+    font-weight: bold;
 }

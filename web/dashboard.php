@@ -13,13 +13,51 @@ $totalLogs = $conn->query("SELECT COUNT(*) AS total FROM logs")->fetch_assoc()['
 
 <div class="main">
     <h1>Dashboard</h1>
-    <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['user']); ?></p>
+    <p>Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['user']); ?></strong></p>
 
-    <div class="cards">
-        <div class="card"><h3>Equipos</h3><p><?php echo $totalEquipos; ?></p></div>
-        <div class="card"><h3>Servicios</h3><p><?php echo $totalServicios; ?></p></div>
-        <div class="card"><h3>Incidencias</h3><p><?php echo $totalIncidencias; ?></p></div>
-        <div class="card"><h3>Logs</h3><p><?php echo $totalLogs; ?></p></div>
+    <div class="dashboard-grid">
+
+        <a href="equipos.php" class="dashboard-card equipos-card">
+            <div class="card-icon">🖥️</div>
+            <div class="card-content">
+                <h3>Equipos</h3>
+                <p><?php echo $totalEquipos; ?></p>
+            </div>
+            <div class="card-arrow">›</div>
+        </a>
+
+        <a href="servicios.php" class="dashboard-card servicios-card">
+            <div class="card-icon">🗄️</div>
+            <div class="card-content">
+                <h3>Servicios</h3>
+                <p><?php echo $totalServicios; ?></p>
+            </div>
+            <div class="card-arrow">›</div>
+        </a>
+
+        <a href="incidencias.php" class="dashboard-card incidencias-card">
+            <div class="card-icon">⚠️</div>
+            <div class="card-content">
+                <h3>Incidencias</h3>
+                <p><?php echo $totalIncidencias; ?></p>
+            </div>
+            <div class="card-arrow">›</div>
+        </a>
+
+        <a href="logs.php" class="dashboard-card logs-card">
+            <div class="card-icon">📄</div>
+            <div class="card-content">
+                <h3>Logs</h3>
+                <p><?php echo $totalLogs; ?></p>
+            </div>
+            <div class="card-arrow">›</div>
+        </a>
+
+    </div>
+
+    <div class="info-panel">
+        <h3>Información</h3>
+        <p>Desde aquí puedes acceder rápidamente a los módulos principales del sistema.</p>
     </div>
 </div>
 

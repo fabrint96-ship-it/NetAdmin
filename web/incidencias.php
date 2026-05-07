@@ -8,7 +8,7 @@ $equipos = $conn->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC");
 $sql = "SELECT incidencias.*, equipos.nombre AS equipo_nombre
         FROM incidencias
         LEFT JOIN equipos ON incidencias.equipo_id = equipos.id
-        ORDER BY incidencias.fecha DESC";
+        ORDER BY incidencias.id DESC";
 
 $result = $conn->query($sql);
 ?>
@@ -48,6 +48,8 @@ $result = $conn->query($sql);
         <button type="submit">Registrar incidencia</button>
     </form>
 
+    <input type="text" id="buscar" placeholder="Buscar incidencia...">
+
     <table>
         <thead>
             <tr>
@@ -57,18 +59,23 @@ $result = $conn->query($sql);
                 <th>Estado</th>
                 <th>Equipo</th>
                 <th>Fecha</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
         <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
+                <tr class="fila-busqueda">
                     <td><?php echo limpiar($row['id']); ?></td>
                     <td><?php echo limpiar($row['titulo']); ?></td>
                     <td><?php echo limpiar($row['prioridad']); ?></td>
                     <td><?php echo limpiar($row['estado']); ?></td>
                     <td><?php echo limpiar($row['equipo_nombre'] ?? 'Sin asignar'); ?></td>
                     <td><?php echo limpiar($row['fecha']); ?></td>
+                    <td>
+                        <a href="edit_incidencia.php?id=<?php echo $row['id']; ?>">Editar</a> |
+                        <a href="delete_incidencia.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar esta incidencia?');">Eliminar</a>
+                    </td>
                 </tr>
             <?php endwhile; ?>
         </tbody>
