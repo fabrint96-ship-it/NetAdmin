@@ -2,12 +2,12 @@
 set BACKUP_FILE=C:\backup\netadmin_backup.sql
 
 if not exist %BACKUP_FILE% (
-    echo No existe el archivo de backup.
+    echo No existe el archivo de backup: %BACKUP_FILE%
     pause
     exit /b
 )
 
-mysql -u root netadmin < %BACKUP_FILE%
+C:\xampp\mysql\bin\mysql -u root netadmin < %BACKUP_FILE%
 
 echo Restauracion completada correctamente.
 pause
