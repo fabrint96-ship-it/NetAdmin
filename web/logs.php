@@ -1,6 +1,7 @@
 <?php
 require_once 'includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
+require_once 'includes/functions.php';
 
 $result = $conn->query("SELECT * FROM logs ORDER BY fecha DESC");
 ?>
@@ -10,7 +11,6 @@ $result = $conn->query("SELECT * FROM logs ORDER BY fecha DESC");
 
 <div class="main">
     <h1>Logs del sistema</h1>
-    <p>Registro de acciones realizadas dentro de NetAdmin Web.</p>
 
     <table>
         <thead>
@@ -25,10 +25,10 @@ $result = $conn->query("SELECT * FROM logs ORDER BY fecha DESC");
         <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['usuario']); ?></td>
-                    <td><?php echo htmlspecialchars($row['accion']); ?></td>
-                    <td><?php echo htmlspecialchars($row['fecha']); ?></td>
+                    <td><?php echo limpiar($row['id']); ?></td>
+                    <td><?php echo limpiar($row['usuario']); ?></td>
+                    <td><?php echo limpiar($row['accion']); ?></td>
+                    <td><?php echo limpiar($row['fecha']); ?></td>
                 </tr>
             <?php endwhile; ?>
         </tbody>

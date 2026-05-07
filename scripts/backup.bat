@@ -6,7 +6,7 @@ if not exist %BACKUP_DIR% (
     mkdir %BACKUP_DIR%
 )
 
-C:\xampp\mysql\bin\mysqldump -u root netadmin > %BACKUP_FILE%
+C:\xampp\mysql\bin\mysqldump.exe -u root netadmin > %BACKUP_FILE%
 
 if exist %BACKUP_FILE% (
     echo Backup realizado correctamente en %BACKUP_FILE%

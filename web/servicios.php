@@ -1,36 +1,73 @@
+<?php
+require_once 'includes/auth.php';
+require_once __DIR__ . '/../config/db.php';
+require_once 'includes/functions.php';
+
+$equipos = $conn->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC");
+
+$sql = "SELECT servicios.*, equipos.nombre AS equipo_nombre
+        FROM servicios
+        LEFT JOIN equipos ON servicios.equipo_id = equipos.id
+        ORDER BY servicios.id DESC";
+
+$result = $conn->query($sql);
+?>
+
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/sidebar.php'; ?>
 
 <div class="main">
     <h1>Servicios</h1>
 
-    <form class="form-grid">
-        <input type="text" placeholder="Nombre del servicio">
-        <input type="number" placeholder="Puerto">
-        <select>
-            <option>TCP</option>
-            <option>UDP</option>
+    <form action="add_servicio.php" method="POST" class="form-grid">
+        <input type="text" name="nombre" placeholder="Nombre del servicio" required>
+        <input type="number" name="puerto" placeholder="Puerto" required>
+
+        <select name="protocolo" required>
+            <option value="TCP">TCP</option>
+            <option value="UDP">UDP</option>
         </select>
-        <input type="text" placeholder="Equipo asociado">
+
+        <select name="equipo_id">
+            <option value="">Sin equipo asociado</option>
+            <?php while ($equipo = $equipos->fetch_assoc()): ?>
+                <option value="<?php echo $equipo['id']; ?>">
+                    <?php echo limpiar($equipo['nombre']); ?>
+                </option>
+            <?php endwhile; ?>
+        </select>
+
+        <select name="estado">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+        </select>
+
         <button type="submit">Añadir servicio</button>
     </form>
 
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Servicio</th>
                 <th>Puerto</th>
                 <th>Protocolo</th>
                 <th>Equipo</th>
+                <th>Estado</th>
             </tr>
         </thead>
+
         <tbody>
-            <tr>
-                <td>HTTP</td>
-                <td>80</td>
-                <td>TCP</td>
-                <td>SRV-WEB-01</td>
-            </tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo limpiar($row['id']); ?></td>
+                    <td><?php echo limpiar($row['nombre']); ?></td>
+                    <td><?php echo limpiar($row['puerto']); ?></td>
+                    <td><?php echo limpiar($row['protocolo']); ?></td>
+                    <td><?php echo limpiar($row['equipo_nombre'] ?? 'Sin asignar'); ?></td>
+                    <td><?php echo limpiar($row['estado']); ?></td>
+                </tr>
+            <?php endwhile; ?>
         </tbody>
     </table>
 </div>

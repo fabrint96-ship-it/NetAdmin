@@ -7,7 +7,7 @@ if not exist %BACKUP_FILE% (
     exit /b
 )
 
-C:\xampp\mysql\bin\mysql -u root netadmin < %BACKUP_FILE%
+C:\xampp\mysql\bin\mysql.exe -u root netadmin < %BACKUP_FILE%
 
 echo Restauracion completada correctamente.
 pause

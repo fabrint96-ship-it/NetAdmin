@@ -1,15 +1,49 @@
+<?php
+session_start();
+require_once __DIR__ . '/../config/db.php';
+require_once 'includes/functions.php';
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = trim($_POST["username"]);
+    $password = trim($_POST["password"]);
+
+    $stmt = $conn->prepare("SELECT username, password FROM usuarios WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        if (password_verify($password, $row["password"])) {
+            $_SESSION["user"] = $row["username"];
+            registrarLog($conn, $row["username"], "Inicio de sesión");
+            header("Location: dashboard.php");
+            exit;
+        } else {
+            $error = "Contraseña incorrecta";
+        }
+    } else {
+        $error = "Usuario no encontrado";
+    }
+}
+?>
+
 <?php include 'includes/header.php'; ?>
 
 <div class="container">
     <h2>Iniciar sesión</h2>
 
-    <form action="dashboard.php" method="POST">
+    <?php if ($error): ?>
+        <p class="error"><?php echo limpiar($error); ?></p>
+    <?php endif; ?>
+
+    <form method="POST">
         <input type="text" name="username" placeholder="Usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <button type="submit">Entrar</button>
     </form>
-
-    <p class="small-text">Acceso restringido al personal autorizado.</p>
 </div>
 
 <?php include 'includes/footer.php'; ?>
