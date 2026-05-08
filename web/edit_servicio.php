@@ -5,18 +5,16 @@ require_once 'includes/functions.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$stmt = $conn->prepare("SELECT * FROM servicios WHERE id = ?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-$servicio = $result->fetch_assoc();
+$stmt = $pdo->prepare("SELECT * FROM servicios WHERE id = :id");
+$stmt->execute([':id' => $id]);
+$servicio = $stmt->fetch();
 
 if (!$servicio) {
     header("Location: servicios.php");
     exit;
 }
 
-$equipos = $conn->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC");
+$equipos = $pdo->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC")->fetchAll();
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -38,11 +36,11 @@ $equipos = $conn->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC");
 
         <select name="equipo_id">
             <option value="">Sin equipo asociado</option>
-            <?php while ($equipo = $equipos->fetch_assoc()): ?>
+            <?php foreach ($equipos as $equipo): ?>
                 <option value="<?php echo $equipo['id']; ?>" <?php if ((int)$servicio['equipo_id'] === (int)$equipo['id']) echo 'selected'; ?>>
                     <?php echo limpiar($equipo['nombre']); ?>
                 </option>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </select>
 
         <select name="estado">
