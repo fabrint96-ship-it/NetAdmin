@@ -1,34 +1,20 @@
 <?php
-/**
- * connection.php - SOLUCIÓN "D" DE LA DOCUMENTACIÓN DE NEON
- * Especificar el endpoint dentro del campo de la contraseña.
- */
-
-$host     = 'ep-morning-fire-alf10iel-pooler.c-3.eu-central-1.aws.neon.tech';
-$db       = 'neondb';
-$user     = 'neondb_owner';
-$pass_real = 'npg_0caIhWm7gpPT';
-$endpoint = 'ep-morning-fire-alf10iel-pooler';
-
-/**
- * Según el apartado D: "provide a string consisting of the endpoint option 
- * and your password, separated by a dollar sign character ($)"
- * Formato: endpoint=id$password
- */
-$password_neon = "endpoint=" . $endpoint . "$" . $pass_real;
+$host = getenv("DB_HOST");
+$port = getenv("DB_PORT") ?: "5432";
+$dbname = getenv("DB_NAME");
+$user = getenv("DB_USER");
+$password = getenv("DB_PASSWORD");
 
 try {
-    // DSN limpio, sin el parámetro options que daba error antes
-    $dsn = "pgsql:host=$host;port=5432;dbname=$db;sslmode=require";
-
-    $pdo = new PDO($dsn, $user, $password_neon, [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ]);
-
-    // echo "✅ ¡CONEXIÓN CONSEGUIDA USANDO EL MÉTODO D!";
-
+    $pdo = new PDO(
+        "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require",
+        $user,
+        $password,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
 } catch (PDOException $e) {
-    die("Error crítico de conexión: " . $e->getMessage());
-} 
+    die("Error de conexión: " . $e->getMessage());
+}
