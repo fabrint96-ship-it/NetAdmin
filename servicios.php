@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/auth.php';
-require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/config/db.php';
 require_once 'includes/functions.php';
 
 $equipos = $pdo->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC")->fetchAll();
