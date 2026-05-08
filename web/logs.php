@@ -3,7 +3,7 @@ require_once 'includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 require_once 'includes/functions.php';
 
-$result = $conn->query("SELECT * FROM logs ORDER BY fecha DESC");
+$logs = $pdo->query("SELECT * FROM logs ORDER BY id DESC")->fetchAll();
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -23,14 +23,14 @@ $result = $conn->query("SELECT * FROM logs ORDER BY fecha DESC");
         </thead>
 
         <tbody>
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php foreach ($logs as $row): ?>
                 <tr>
                     <td><?php echo limpiar($row['id']); ?></td>
                     <td><?php echo limpiar($row['usuario']); ?></td>
                     <td><?php echo limpiar($row['accion']); ?></td>
                     <td><?php echo limpiar($row['fecha']); ?></td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

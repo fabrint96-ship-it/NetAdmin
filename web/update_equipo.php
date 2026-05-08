@@ -11,16 +11,38 @@ $sistema_operativo = trim($_POST['sistema_operativo']);
 $ubicacion = trim($_POST['ubicacion']);
 $estado = trim($_POST['estado']);
 
-$stmt = $conn->prepare(
-    "UPDATE equipos
-     SET nombre = ?, ip = ?, tipo = ?, sistema_operativo = ?, ubicacion = ?, estado = ?
-     WHERE id = ?"
-);
+try {
+    $stmt = $pdo->prepare(
+        "UPDATE equipos
+         SET nombre = :nombre,
+             ip = :ip,
+             tipo = :tipo,
+             sistema_operativo = :sistema_operativo,
+             ubicacion = :ubicacion,
+             estado = :estado
+         WHERE id = :id"
+    );
 
-$stmt->bind_param("ssssssi", $nombre, $ip, $tipo, $sistema_operativo, $ubicacion, $estado, $id);
-$stmt->execute();
+    $stmt->execute([
+        ':nombre' => $nombre,
+        ':ip' => $ip,
+        ':tipo' => $tipo,
+        ':sistema_operativo' => $sistema_operativo,
+        ':ubicacion' => $ubicacion,
+        ':estado' => $estado,
+        ':id' => $id
+    ]);
 
-registrarLog($conn, usuarioActual(), "Actualizó el equipo: " . $nombre);
+    registrarLog($pdo, usuarioActual(), "Actualizó el equipo: " . $nombre);
 
-header("Location: equipos.php");
-exit;
+    header("Location: equipos.php");
+    exit;
+
+} catch (PDOException $e) {
+    if ($e->getCode() === "23505") {
+        header("Location: edit_equipo.php?id=" . $id . "&error=ip_duplicada");
+        exit;
+    }
+
+    die("Error al actualizar equipo: " . $e->getMessage());
+}

@@ -1,5 +1,6 @@
 <div class="sidebar">
     <h2>NetAdmin</h2>
+
     <a href="dashboard.php">Dashboard</a>
     <a href="equipos.php">Equipos</a>
     <a href="servicios.php">Servicios</a>

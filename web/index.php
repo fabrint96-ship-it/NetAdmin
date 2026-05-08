@@ -2,7 +2,7 @@
 
 <div class="container">
     <h1>NetAdmin Web</h1>
-    <p>Herramienta local para administradores de red.</p>
+    <p>Herramienta web para administradores de red.</p>
     <a class="btn" href="login.php">Iniciar sesión</a>
 </div>
 

@@ -3,14 +3,14 @@ require_once 'includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 require_once 'includes/functions.php';
 
-$equipos = $conn->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC");
+$equipos = $pdo->query("SELECT id, nombre FROM equipos ORDER BY nombre ASC")->fetchAll();
 
 $sql = "SELECT servicios.*, equipos.nombre AS equipo_nombre
         FROM servicios
         LEFT JOIN equipos ON servicios.equipo_id = equipos.id
         ORDER BY servicios.id DESC";
 
-$result = $conn->query($sql);
+$servicios = $pdo->query($sql)->fetchAll();
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -30,11 +30,11 @@ $result = $conn->query($sql);
 
         <select name="equipo_id">
             <option value="">Sin equipo asociado</option>
-            <?php while ($equipo = $equipos->fetch_assoc()): ?>
+            <?php foreach ($equipos as $equipo): ?>
                 <option value="<?php echo $equipo['id']; ?>">
                     <?php echo limpiar($equipo['nombre']); ?>
                 </option>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </select>
 
         <select name="estado">
@@ -61,7 +61,7 @@ $result = $conn->query($sql);
         </thead>
 
         <tbody>
-            <?php while ($row = $result->fetch_assoc()): ?>
+            <?php foreach ($servicios as $row): ?>
                 <tr class="fila-busqueda">
                     <td><?php echo limpiar($row['id']); ?></td>
                     <td><?php echo limpiar($row['nombre']); ?></td>
@@ -74,7 +74,7 @@ $result = $conn->query($sql);
                         <a href="delete_servicio.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar este servicio?');">Eliminar</a>
                     </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

@@ -5,11 +5,10 @@ require_once 'includes/functions.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$stmt = $conn->prepare("DELETE FROM incidencias WHERE id = ?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
+$stmt = $pdo->prepare("DELETE FROM incidencias WHERE id = :id");
+$stmt->execute([':id' => $id]);
 
-registrarLog($conn, usuarioActual(), "Eliminó la incidencia con ID: " . $id);
+registrarLog($pdo, usuarioActual(), "Eliminó la incidencia con ID: " . $id);
 
 header("Location: incidencias.php");
 exit;

@@ -1,11 +1,12 @@
 <?php
 require_once 'includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
+require_once 'includes/functions.php';
 
-$totalEquipos = $conn->query("SELECT COUNT(*) AS total FROM equipos")->fetch_assoc()['total'];
-$totalServicios = $conn->query("SELECT COUNT(*) AS total FROM servicios")->fetch_assoc()['total'];
-$totalIncidencias = $conn->query("SELECT COUNT(*) AS total FROM incidencias")->fetch_assoc()['total'];
-$totalLogs = $conn->query("SELECT COUNT(*) AS total FROM logs")->fetch_assoc()['total'];
+$totalEquipos = $pdo->query("SELECT COUNT(*) AS total FROM equipos")->fetch()['total'];
+$totalServicios = $pdo->query("SELECT COUNT(*) AS total FROM servicios")->fetch()['total'];
+$totalIncidencias = $pdo->query("SELECT COUNT(*) AS total FROM incidencias")->fetch()['total'];
+$totalLogs = $pdo->query("SELECT COUNT(*) AS total FROM logs")->fetch()['total'];
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -13,7 +14,7 @@ $totalLogs = $conn->query("SELECT COUNT(*) AS total FROM logs")->fetch_assoc()['
 
 <div class="main">
     <h1>Dashboard</h1>
-    <p>Bienvenido, <strong><?php echo htmlspecialchars($_SESSION['user']); ?></strong></p>
+    <p>Bienvenido, <strong><?php echo limpiar($_SESSION['user']); ?></strong></p>
 
     <div class="dashboard-grid">
 

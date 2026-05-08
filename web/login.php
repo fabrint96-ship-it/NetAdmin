@@ -9,16 +9,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
-    $stmt = $conn->prepare("SELECT username, password FROM usuarios WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
+    $stmt = $pdo->prepare(
+        "SELECT username, password FROM usuarios WHERE username = :username"
+    );
 
-    $result = $stmt->get_result();
+    $stmt->execute([
+        ':username' => $username
+    ]);
 
-    if ($row = $result->fetch_assoc()) {
+    $row = $stmt->fetch();
+
+    if ($row) {
         if (password_verify($password, $row["password"])) {
             $_SESSION["user"] = $row["username"];
-            registrarLog($conn, $row["username"], "Inicio de sesión");
+
+            registrarLog($pdo, $row["username"], "Inicio de sesión");
+
             header("Location: dashboard.php");
             exit;
         } else {

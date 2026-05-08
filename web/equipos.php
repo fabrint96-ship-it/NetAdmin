@@ -3,7 +3,8 @@ require_once 'includes/auth.php';
 require_once __DIR__ . '/../config/db.php';
 require_once 'includes/functions.php';
 
-$result = $conn->query("SELECT * FROM equipos ORDER BY id DESC");
+$stmt = $pdo->query("SELECT * FROM equipos ORDER BY id DESC");
+$equipos = $stmt->fetchAll();
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -11,6 +12,10 @@ $result = $conn->query("SELECT * FROM equipos ORDER BY id DESC");
 
 <div class="main">
     <h1>Gestión de equipos</h1>
+
+    <?php if (isset($_GET['error']) && $_GET['error'] === 'ip_duplicada'): ?>
+        <p class="error">La IP introducida ya existe. Usa otra dirección IP.</p>
+    <?php endif; ?>
 
     <form action="add_equipo.php" method="POST" class="form-grid">
         <input type="text" name="nombre" placeholder="Nombre" required>
@@ -45,8 +50,8 @@ $result = $conn->query("SELECT * FROM equipos ORDER BY id DESC");
         </thead>
 
         <tbody>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <tr class="fila-equipo">
+            <?php foreach ($equipos as $row): ?>
+                <tr class="fila-busqueda">
                     <td><?php echo limpiar($row['id']); ?></td>
                     <td><?php echo limpiar($row['nombre']); ?></td>
                     <td><?php echo limpiar($row['ip']); ?></td>
@@ -59,7 +64,7 @@ $result = $conn->query("SELECT * FROM equipos ORDER BY id DESC");
                         <a href="delete_equipo.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar este equipo?');">Eliminar</a>
                     </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </div>

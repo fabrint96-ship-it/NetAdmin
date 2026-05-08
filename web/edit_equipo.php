@@ -5,12 +5,9 @@ require_once 'includes/functions.php';
 
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$stmt = $conn->prepare("SELECT * FROM equipos WHERE id = ?");
-$stmt->bind_param("i", $id);
-$stmt->execute();
-
-$result = $stmt->get_result();
-$equipo = $result->fetch_assoc();
+$stmt = $pdo->prepare("SELECT * FROM equipos WHERE id = :id");
+$stmt->execute([':id' => $id]);
+$equipo = $stmt->fetch();
 
 if (!$equipo) {
     header("Location: equipos.php");
@@ -23,6 +20,10 @@ if (!$equipo) {
 
 <div class="main">
     <h1>Editar equipo</h1>
+
+    <?php if (isset($_GET['error']) && $_GET['error'] === 'ip_duplicada'): ?>
+        <p class="error">La IP introducida ya existe en otro equipo.</p>
+    <?php endif; ?>
 
     <form action="update_equipo.php" method="POST" class="form-grid">
         <input type="hidden" name="id" value="<?php echo limpiar($equipo['id']); ?>">

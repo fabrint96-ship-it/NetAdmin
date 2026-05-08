@@ -1,15 +1,20 @@
 <?php
 
 function limpiar($dato) {
-    return htmlspecialchars(trim($dato), ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars(trim((string)$dato), ENT_QUOTES, 'UTF-8');
 }
 
 function usuarioActual() {
     return $_SESSION['user'] ?? 'desconocido';
 }
 
-function registrarLog($conn, $usuario, $accion) {
-    $stmt = $conn->prepare("INSERT INTO logs (usuario, accion) VALUES (?, ?)");
-    $stmt->bind_param("ss", $usuario, $accion);
-    $stmt->execute();
+function registrarLog($pdo, $usuario, $accion) {
+    $stmt = $pdo->prepare(
+        "INSERT INTO logs (usuario, accion) VALUES (:usuario, :accion)"
+    );
+
+    $stmt->execute([
+        ':usuario' => $usuario,
+        ':accion' => $accion
+    ]);
 }
