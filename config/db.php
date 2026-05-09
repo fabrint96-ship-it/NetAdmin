@@ -4,10 +4,13 @@ $host = getenv("DB_HOST");
 $port = getenv("DB_PORT") ?: "5432";
 $dbname = getenv("DB_NAME");
 $user = getenv("DB_USER");
-$password = getenv("DB_PASSWORD");
+
+$passReal = getenv("DB_PASS_REAL");
+$endpoint = getenv("DB_ENDPOINT");
+
+$password = "endpoint=" . $endpoint . "$" . $passReal;
 
 try {
-
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname;sslmode=require";
 
     $pdo = new PDO($dsn, $user, $password, [
@@ -17,6 +20,5 @@ try {
     ]);
 
 } catch (PDOException $e) {
-
     die("Error crítico de conexión: " . $e->getMessage());
 }
