@@ -8,14 +8,24 @@ function usuarioActual() {
     return $_SESSION['user'] ?? 'desconocido';
 }
 
-function registrarLog($pdo, $usuario, $accion) {
+function registrarLog($pdo, $usuario, $accion, $tabla = null, $registroId = null) {
+    $ipCliente = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'desconocida';
+
+    if (strpos($ipCliente, ',') !== false) {
+        $ipCliente = explode(',', $ipCliente)[0];
+    }
+
     $stmt = $pdo->prepare(
-        "INSERT INTO logs (usuario, accion) VALUES (:usuario, :accion)"
+        "INSERT INTO logs (usuario, accion, tabla_afectada, registro_id, ip_cliente)
+         VALUES (:usuario, :accion, :tabla_afectada, :registro_id, :ip_cliente)"
     );
 
     $stmt->execute([
         ':usuario' => $usuario,
-        ':accion' => $accion
+        ':accion' => $accion,
+        ':tabla_afectada' => $tabla,
+        ':registro_id' => $registroId,
+        ':ip_cliente' => $ipCliente
     ]);
 }
 

@@ -30,7 +30,7 @@ $stmt->bindValue(':equipo_id', $equipo_id, $equipo_id === null ? PDO::PARAM_NULL
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
-registrarLog($pdo, usuarioActual(), "Actualizó la incidencia: " . $titulo);
+registrarLog($pdo, usuarioActual(), "Actualizó la incidencia: " . $titulo, "incidencias", $id);
 
 header("Location: incidencias.php");
 exit;

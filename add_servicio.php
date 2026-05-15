@@ -23,7 +23,9 @@ $stmt->bindValue(':equipo_id', $equipo_id, $equipo_id === null ? PDO::PARAM_NULL
 $stmt->bindValue(':estado', $estado);
 $stmt->execute();
 
-registrarLog($pdo, usuarioActual(), "Añadió el servicio: " . $nombre);
+$nuevoId = $pdo->lastInsertId();
+
+registrarLog($pdo, usuarioActual(), "Añadió el servicio: " . $nombre, "servicios", $nuevoId);
 
 header("Location: servicios.php");
 exit;
