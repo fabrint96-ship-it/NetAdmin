@@ -3,6 +3,8 @@ require_once 'includes/auth.php';
 require_once __DIR__ . '/config/db.php';
 require_once 'includes/functions.php';
 
+bloquearSiNoPuedeEditar();
+
 $nombre = trim($_POST['nombre']);
 $puerto = (int) $_POST['puerto'];
 $protocolo = trim($_POST['protocolo']);

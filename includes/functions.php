@@ -18,3 +18,41 @@ function registrarLog($pdo, $usuario, $accion) {
         ':accion' => $accion
     ]);
 }
+
+function rolActual() {
+    return $_SESSION['rol'] ?? 'auditor';
+}
+
+function esAdmin() {
+    return rolActual() === 'admin';
+}
+
+function esTecnico() {
+    return rolActual() === 'tecnico';
+}
+
+function esAuditor() {
+    return rolActual() === 'auditor';
+}
+
+function puedeEditar() {
+    return in_array(rolActual(), ['admin', 'tecnico']);
+}
+
+function puedeEliminar() {
+    return rolActual() === 'admin';
+}
+
+function bloquearSiNoPuedeEditar() {
+    if (!puedeEditar()) {
+        header("Location: dashboard.php?error=sin_permiso");
+        exit;
+    }
+}
+
+function bloquearSiNoPuedeEliminar() {
+    if (!puedeEliminar()) {
+        header("Location: dashboard.php?error=sin_permiso");
+        exit;
+    }
+}

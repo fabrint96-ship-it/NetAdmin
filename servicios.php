@@ -70,8 +70,13 @@ $servicios = $pdo->query($sql)->fetchAll();
                     <td><?php echo limpiar($row['equipo_nombre'] ?? 'Sin asignar'); ?></td>
                     <td><?php echo limpiar($row['estado']); ?></td>
                     <td>
-                        <a href="edit_servicio.php?id=<?php echo $row['id']; ?>">Editar</a> |
-                        <a href="delete_servicio.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar este servicio?');">Eliminar</a>
+                        <?php if (puedeEditar()): ?>
+                            <a href="edit_servicio.php?id=<?php echo $row['id']; ?>">Editar</a>
+                        <?php endif; ?>
+
+                        <?php if (puedeEliminar()): ?>
+                            | <a href="delete_servicio.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar este servicio?');">Eliminar</a>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

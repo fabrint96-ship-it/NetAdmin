@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = trim($_POST["password"]);
 
     $stmt = $pdo->prepare(
-        "SELECT username, password FROM usuarios WHERE username = :username"
+        "SELECT username, password, rol FROM usuarios WHERE username = :username"
     );
 
     $stmt->execute([
@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($row) {
         if (password_verify($password, $row["password"])) {
             $_SESSION["user"] = $row["username"];
+            $_SESSION["rol"] = $row["rol"];
 
             registrarLog($pdo, $row["username"], "Inicio de sesión");
 

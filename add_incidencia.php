@@ -3,6 +3,8 @@ require_once 'includes/auth.php';
 require_once __DIR__ . '/config/db.php';
 require_once 'includes/functions.php';
 
+bloquearSiNoPuedeEditar();
+
 $titulo = trim($_POST['titulo']);
 $descripcion = trim($_POST['descripcion']);
 $prioridad = trim($_POST['prioridad']);
