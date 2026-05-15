@@ -100,21 +100,21 @@ $graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
     <div class="charts-grid">
         <div class="chart-card">
             <h3>Equipos por estado</h3>
-            <div class="chart-wrapper">
+            <div class="chart-box">
                 <canvas id="chartEquipos"></canvas>
             </div>
         </div>
 
         <div class="chart-card">
             <h3>Servicios por estado</h3>
-            <div class="chart-wrapper">
+            <div class="chart-box">
                 <canvas id="chartServicios"></canvas>
             </div>
         </div>
 
         <div class="chart-card">
             <h3>Incidencias por prioridad</h3>
-            <div class="chart-wrapper">
+            <div class="chart-box">
                 <canvas id="chartIncidencias"></canvas>
             </div>
         </div>
@@ -138,6 +138,11 @@ const serviciosValues = <?php echo json_encode($graficaServicios['values']); ?>;
 const incidenciasLabels = <?php echo json_encode($graficaIncidencias['labels']); ?>;
 const incidenciasValues = <?php echo json_encode($graficaIncidencias['values']); ?>;
 
+const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false
+};
+
 new Chart(document.getElementById('chartEquipos'), {
     type: 'doughnut',
     data: {
@@ -145,7 +150,8 @@ new Chart(document.getElementById('chartEquipos'), {
         datasets: [{
             data: equiposValues
         }]
-    }
+    },
+    options: chartOptions
 });
 
 new Chart(document.getElementById('chartServicios'), {
@@ -156,10 +162,7 @@ new Chart(document.getElementById('chartServicios'), {
             data: serviciosValues
         }]
     },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
+    options: chartOptions
 });
 
 new Chart(document.getElementById('chartIncidencias'), {
@@ -171,10 +174,7 @@ new Chart(document.getElementById('chartIncidencias'), {
             data: incidenciasValues
         }]
     },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
+    options: chartOptions
 });
 </script>
 
