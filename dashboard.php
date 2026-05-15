@@ -7,6 +7,46 @@ $totalEquipos = $pdo->query("SELECT COUNT(*) AS total FROM equipos")->fetch()['t
 $totalServicios = $pdo->query("SELECT COUNT(*) AS total FROM servicios")->fetch()['total'];
 $totalIncidencias = $pdo->query("SELECT COUNT(*) AS total FROM incidencias")->fetch()['total'];
 $totalLogs = $pdo->query("SELECT COUNT(*) AS total FROM logs")->fetch()['total'];
+
+$equiposEstado = $pdo->query("
+    SELECT estado, COUNT(*) AS total
+    FROM equipos
+    GROUP BY estado
+    ORDER BY estado
+")->fetchAll();
+
+$serviciosEstado = $pdo->query("
+    SELECT estado, COUNT(*) AS total
+    FROM servicios
+    GROUP BY estado
+    ORDER BY estado
+")->fetchAll();
+
+$incidenciasPrioridad = $pdo->query("
+    SELECT prioridad, COUNT(*) AS total
+    FROM incidencias
+    GROUP BY prioridad
+    ORDER BY prioridad
+")->fetchAll();
+
+function prepararDatosGrafica($datos, $campo) {
+    $labels = [];
+    $values = [];
+
+    foreach ($datos as $fila) {
+        $labels[] = $fila[$campo] ?? 'Sin definir';
+        $values[] = (int) $fila['total'];
+    }
+
+    return [
+        'labels' => $labels,
+        'values' => $values
+    ];
+}
+
+$graficaEquipos = prepararDatosGrafica($equiposEstado, 'estado');
+$graficaServicios = prepararDatosGrafica($serviciosEstado, 'estado');
+$graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -15,7 +55,7 @@ $totalLogs = $pdo->query("SELECT COUNT(*) AS total FROM logs")->fetch()['total']
 <div class="main">
     <h1>Dashboard</h1>
     <p>Bienvenido, <strong><?php echo limpiar($_SESSION['user']); ?></strong></p>
-    <p>Rol: <strong><?php echo limpiar($_SESSION['rol']); ?></strong></p>
+    <p>Rol: <strong><?php echo limpiar($_SESSION['rol'] ?? 'sin rol'); ?></strong></p>
 
     <div class="dashboard-grid">
 
@@ -57,10 +97,71 @@ $totalLogs = $pdo->query("SELECT COUNT(*) AS total FROM logs")->fetch()['total']
 
     </div>
 
+    <div class="charts-grid">
+        <div class="chart-card">
+            <h3>Equipos por estado</h3>
+            <canvas id="chartEquipos"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>Servicios por estado</h3>
+            <canvas id="chartServicios"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>Incidencias por prioridad</h3>
+            <canvas id="chartIncidencias"></canvas>
+        </div>
+    </div>
+
     <div class="info-panel">
         <h3>Información</h3>
-        <p>Desde aquí puedes acceder rápidamente a los módulos principales del sistema.</p>
+        <p>El dashboard muestra indicadores generales y gráficas de estado del sistema.</p>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const equiposLabels = <?php echo json_encode($graficaEquipos['labels']); ?>;
+const equiposValues = <?php echo json_encode($graficaEquipos['values']); ?>;
+
+const serviciosLabels = <?php echo json_encode($graficaServicios['labels']); ?>;
+const serviciosValues = <?php echo json_encode($graficaServicios['values']); ?>;
+
+const incidenciasLabels = <?php echo json_encode($graficaIncidencias['labels']); ?>;
+const incidenciasValues = <?php echo json_encode($graficaIncidencias['values']); ?>;
+
+new Chart(document.getElementById('chartEquipos'), {
+    type: 'doughnut',
+    data: {
+        labels: equiposLabels,
+        datasets: [{
+            data: equiposValues
+        }]
+    }
+});
+
+new Chart(document.getElementById('chartServicios'), {
+    type: 'doughnut',
+    data: {
+        labels: serviciosLabels,
+        datasets: [{
+            data: serviciosValues
+        }]
+    }
+});
+
+new Chart(document.getElementById('chartIncidencias'), {
+    type: 'bar',
+    data: {
+        labels: incidenciasLabels,
+        datasets: [{
+            label: 'Incidencias',
+            data: incidenciasValues
+        }]
+    }
+});
+</script>
 
 <?php include 'includes/footer.php'; ?>
