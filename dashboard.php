@@ -100,17 +100,23 @@ $graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
     <div class="charts-grid">
         <div class="chart-card">
             <h3>Equipos por estado</h3>
-            <canvas id="chartEquipos"></canvas>
+            <div class="chart-wrapper">
+                <canvas id="chartEquipos"></canvas>
+            </div>
         </div>
 
         <div class="chart-card">
             <h3>Servicios por estado</h3>
-            <canvas id="chartServicios"></canvas>
+            <div class="chart-wrapper">
+                <canvas id="chartServicios"></canvas>
+            </div>
         </div>
 
         <div class="chart-card">
             <h3>Incidencias por prioridad</h3>
-            <canvas id="chartIncidencias"></canvas>
+            <div class="chart-wrapper">
+                <canvas id="chartIncidencias"></canvas>
+            </div>
         </div>
     </div>
 
@@ -149,6 +155,10 @@ new Chart(document.getElementById('chartServicios'), {
         datasets: [{
             data: serviciosValues
         }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
     }
 });
 
@@ -160,6 +170,10 @@ new Chart(document.getElementById('chartIncidencias'), {
             label: 'Incidencias',
             data: incidenciasValues
         }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
     }
 });
 </script>
