@@ -338,3 +338,80 @@ table a:hover {
 .chart-card canvas {
     max-height: 280px;
 }
+
+/* Dashboard más compacto */
+
+.dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.dashboard-card {
+    padding: 18px;
+    min-height: 110px;
+}
+
+.card-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 26px;
+}
+
+.card-content {
+    margin-left: 15px;
+}
+
+.card-content h3 {
+    font-size: 20px;
+}
+
+.card-content p {
+    font-size: 28px;
+}
+
+.card-arrow {
+    font-size: 36px;
+}
+
+.charts-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.chart-card {
+    padding: 18px;
+}
+
+.chart-card canvas {
+    max-height: 220px;
+}
+
+/* Tablas más compactas */
+
+table {
+    font-size: 14px;
+}
+
+table th,
+table td {
+    padding: 9px;
+}
+
+/* Responsive */
+
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .dashboard-grid,
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
