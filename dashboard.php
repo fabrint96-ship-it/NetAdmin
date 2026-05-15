@@ -15,6 +15,7 @@ $totalLogs = $pdo->query("SELECT COUNT(*) AS total FROM logs")->fetch()['total']
 <div class="main">
     <h1>Dashboard</h1>
     <p>Bienvenido, <strong><?php echo limpiar($_SESSION['user']); ?></strong></p>
+    <p>Rol: <strong><?php echo limpiar($_SESSION['rol']); ?></strong></p>
 
     <div class="dashboard-grid">
 

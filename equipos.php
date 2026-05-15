@@ -17,7 +17,8 @@ $equipos = $stmt->fetchAll();
         <p class="error">La IP introducida ya existe. Usa otra dirección IP.</p>
     <?php endif; ?>
 
-    <form action="add_equipo.php" method="POST" class="form-grid">
+    <?php if (puedeEditar()): ?>
+        <form action="add_equipo.php" method="POST" class="form-grid">
         <input type="text" name="nombre" placeholder="Nombre" required>
         <input type="text" name="ip" placeholder="IP" required>
         <input type="text" name="tipo" placeholder="Tipo" required>
@@ -32,6 +33,7 @@ $equipos = $stmt->fetchAll();
 
         <button type="submit">Añadir equipo</button>
     </form>
+    <?php endif; ?>
 
     <input type="text" id="buscar" placeholder="Buscar equipo...">
 
@@ -60,8 +62,13 @@ $equipos = $stmt->fetchAll();
                     <td><?php echo limpiar($row['ubicacion']); ?></td>
                     <td><?php echo limpiar($row['estado']); ?></td>
                     <td>
-                        <a href="edit_equipo.php?id=<?php echo $row['id']; ?>">Editar</a> |
-                        <a href="delete_equipo.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar este equipo?');">Eliminar</a>
+                        <?php if (puedeEditar()): ?>
+                            <a href="edit_equipo.php?id=<?php echo $row['id']; ?>">Editar</a>
+                        <?php endif; ?>
+
+                        <?php if (puedeEliminar()): ?>
+                            | <a href="delete_equipo.php?id=<?php echo $row['id']; ?>" onclick="return confirm('¿Eliminar este equipo?');">Eliminar</a>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
