@@ -19,20 +19,20 @@ $equipos = $stmt->fetchAll();
 
     <?php if (puedeEditar()): ?>
         <form action="add_equipo.php" method="POST" class="form-grid">
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <input type="text" name="ip" placeholder="IP" required>
-        <input type="text" name="tipo" placeholder="Tipo" required>
-        <input type="text" name="sistema_operativo" placeholder="Sistema operativo">
-        <input type="text" name="ubicacion" placeholder="Ubicación">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="ip" placeholder="IP" required>
+            <input type="text" name="tipo" placeholder="Tipo" required>
+            <input type="text" name="sistema_operativo" placeholder="Sistema operativo">
+            <input type="text" name="ubicacion" placeholder="Ubicación">
 
-        <select name="estado">
-            <option value="Activo">Activo</option>
-            <option value="Mantenimiento">Mantenimiento</option>
-            <option value="Inactivo">Inactivo</option>
-        </select>
+            <select name="estado">
+                <option value="Activo">Activo</option>
+                <option value="Mantenimiento">Mantenimiento</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
 
-        <button type="submit">Añadir equipo</button>
-    </form>
+            <button type="submit">Añadir equipo</button>
+        </form>
     <?php endif; ?>
 
     <input type="text" id="buscar" placeholder="Buscar equipo...">

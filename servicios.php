@@ -19,31 +19,34 @@ $servicios = $pdo->query($sql)->fetchAll();
 <div class="main">
     <h1>Servicios</h1>
 
-    <form action="add_servicio.php" method="POST" class="form-grid">
-        <input type="text" name="nombre" placeholder="Nombre del servicio" required>
-        <input type="number" name="puerto" placeholder="Puerto" required>
+    <?php if (puedeEditar()): ?>
+        <form action="add_servicio.php" method="POST" class="form-grid">
+            <input type="text" name="nombre" placeholder="Nombre del servicio" required>
+            <input type="number" name="puerto" placeholder="Puerto" required>
 
-        <select name="protocolo" required>
-            <option value="TCP">TCP</option>
-            <option value="UDP">UDP</option>
-        </select>
+            <select name="protocolo" required>
+                <option value="TCP">TCP</option>
+                <option value="UDP">UDP</option>
+            </select>
 
-        <select name="equipo_id">
-            <option value="">Sin equipo asociado</option>
-            <?php foreach ($equipos as $equipo): ?>
-                <option value="<?php echo $equipo['id']; ?>">
-                    <?php echo limpiar($equipo['nombre']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <select name="equipo_id">
+                <option value="">Sin equipo asociado</option>
+                <?php foreach ($equipos as $equipo): ?>
+                    <option value="<?php echo $equipo['id']; ?>">
+                        <?php echo limpiar($equipo['nombre']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-        <select name="estado">
-            <option value="Activo">Activo</option>
-            <option value="Inactivo">Inactivo</option>
-        </select>
+            <select name="estado">
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+            </select>
 
-        <button type="submit">Añadir servicio</button>
-    </form>
+            <button type="submit">Añadir servicio</button>
+        </form>
+    <?php endif; ?>
+    
 
     <input type="text" id="buscar" placeholder="Buscar servicio...">
 

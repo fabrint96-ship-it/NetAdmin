@@ -19,34 +19,36 @@ $incidencias = $pdo->query($sql)->fetchAll();
 <div class="main">
     <h1>Incidencias</h1>
 
-    <form action="add_incidencia.php" method="POST" class="form-grid">
-        <input type="text" name="titulo" placeholder="Título" required>
-        <textarea name="descripcion" placeholder="Descripción"></textarea>
+    <?php if (puedeEditar()): ?>
+        <form action="add_incidencia.php" method="POST" class="form-grid">
+            <input type="text" name="titulo" placeholder="Título" required>
+            <textarea name="descripcion" placeholder="Descripción"></textarea>
 
-        <select name="prioridad">
-            <option value="Baja">Baja</option>
-            <option value="Media">Media</option>
-            <option value="Alta">Alta</option>
-            <option value="Crítica">Crítica</option>
-        </select>
+            <select name="prioridad">
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+                <option value="Crítica">Crítica</option>
+            </select>
 
-        <select name="estado">
-            <option value="Abierta">Abierta</option>
-            <option value="En proceso">En proceso</option>
-            <option value="Cerrada">Cerrada</option>
-        </select>
+            <select name="estado">
+                <option value="Abierta">Abierta</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Cerrada">Cerrada</option>
+            </select>
 
-        <select name="equipo_id">
-            <option value="">Sin equipo asociado</option>
-            <?php foreach ($equipos as $equipo): ?>
-                <option value="<?php echo $equipo['id']; ?>">
-                    <?php echo limpiar($equipo['nombre']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
+            <select name="equipo_id">
+                <option value="">Sin equipo asociado</option>
+                <?php foreach ($equipos as $equipo): ?>
+                    <option value="<?php echo $equipo['id']; ?>">
+                        <?php echo limpiar($equipo['nombre']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-        <button type="submit">Registrar incidencia</button>
-    </form>
+            <button type="submit">Registrar incidencia</button>
+        </form>
+    <?php endif; ?>  
 
     <input type="text" id="buscar" placeholder="Buscar incidencia...">
 
