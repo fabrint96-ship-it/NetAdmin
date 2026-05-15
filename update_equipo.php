@@ -35,7 +35,7 @@ try {
         ':id' => $id
     ]);
 
-    registrarLog($pdo, usuarioActual(), "Actualizó el equipo: " . $nombre);
+    registrarLog($pdo, usuarioActual(), "Actualizó el equipo: " . $nombre, "equipos", $id);
 
     header("Location: equipos.php");
     exit;

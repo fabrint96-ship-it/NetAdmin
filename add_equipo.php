@@ -27,7 +27,9 @@ try {
         ':estado' => $estado
     ]);
 
-    registrarLog($pdo, usuarioActual(), "Añadió el equipo: " . $nombre);
+    $nuevoId = $pdo->lastInsertId();
+
+    registrarLog($pdo, usuarioActual(), "Añadió el equipo: " . $nombre, "equipos", $nuevoId);
 
     header("Location: equipos.php");
     exit;

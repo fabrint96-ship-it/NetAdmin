@@ -10,7 +10,7 @@ $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $stmt = $pdo->prepare("DELETE FROM incidencias WHERE id = :id");
 $stmt->execute([':id' => $id]);
 
-registrarLog($pdo, usuarioActual(), "Eliminó la incidencia con ID: " . $id);
+registrarLog($pdo, usuarioActual(), "Eliminó la incidencia con ID: " . $id, "incidencias", $id);
 
 header("Location: incidencias.php");
 exit;

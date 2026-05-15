@@ -10,7 +10,7 @@ $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $stmt = $pdo->prepare("DELETE FROM servicios WHERE id = :id");
 $stmt->execute([':id' => $id]);
 
-registrarLog($pdo, usuarioActual(), "Eliminó el servicio con ID: " . $id);
+registrarLog($pdo, usuarioActual(), "Eliminó el servicio con ID: " . $id, "servicios", $id);
 
 header("Location: servicios.php");
 exit;

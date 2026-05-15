@@ -30,7 +30,7 @@ $stmt->bindValue(':estado', $estado);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
-registrarLog($pdo, usuarioActual(), "Actualizó el servicio: " . $nombre);
+registrarLog($pdo, usuarioActual(), "Actualizó el servicio: " . $nombre, "servicios", $id);
 
 header("Location: servicios.php");
 exit;
