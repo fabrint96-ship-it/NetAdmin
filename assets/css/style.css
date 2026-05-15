@@ -415,15 +415,23 @@ table a:hover {
 }
 
 .password-wrapper input {
-    padding-right: 45px;
+    width: 100%;
+    padding: 11px 45px 11px 11px;
+    box-sizing: border-box;
 }
 
 .toggle-password {
     position: absolute;
-    right: 14px;
     top: 50%;
+    right: 14px;
     transform: translateY(-50%);
     cursor: pointer;
     user-select: none;
     font-size: 18px;
+    color: #64748b;
+    line-height: 1;
+}
+
+.toggle-password:hover {
+    color: #2563eb;
 }
