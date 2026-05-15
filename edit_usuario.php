@@ -28,7 +28,10 @@ if (!$usuario) {
 
         <input type="text" name="username" value="<?php echo limpiar($usuario['username']); ?>" required>
 
-        <input type="password" name="password" placeholder="Nueva contraseña opcional">
+        <div class="password-box">
+            <input type="password" name="password" id="editUserPassword" placeholder="Nueva contraseña opcional">
+            <button type="button" onclick="togglePassword('editUserPassword')">Mostrar</button>
+        </div>
 
         <select name="rol" required>
             <option value="admin" <?php if ($usuario['rol'] === 'admin') echo 'selected'; ?>>Admin</option>

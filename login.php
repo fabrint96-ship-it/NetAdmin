@@ -48,7 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <form method="POST">
         <input type="text" name="username" placeholder="Usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
+        <div class="password-box">
+            <input type="password" name="password" id="loginPassword" placeholder="Contraseña" required>
+            <button type="button" onclick="togglePassword('loginPassword')">Mostrar</button>
+        </div>
         <button type="submit">Entrar</button>
     </form>
 </div>

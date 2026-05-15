@@ -408,3 +408,19 @@ table a:hover {
         margin-left: 0;
     }
 }
+
+.password-box {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.password-box input {
+    flex: 1;
+}
+
+.password-box button {
+    width: auto;
+    padding: 11px 14px;
+    margin: 8px 0;
+}
