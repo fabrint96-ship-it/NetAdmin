@@ -66,3 +66,10 @@ function bloquearSiNoPuedeEliminar() {
         exit;
     }
 }
+
+function bloquearSiNoEsAdmin() {
+    if (($_SESSION['rol'] ?? '') !== 'admin') {
+        header("Location: dashboard.php?error=sin_permiso");
+        exit;
+    }
+}
