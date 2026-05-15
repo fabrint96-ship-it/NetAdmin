@@ -412,15 +412,18 @@ table a:hover {
 .password-wrapper {
     position: relative;
     width: 100%;
+    margin: 8px 0;
 }
 
 .password-wrapper input {
     width: 100%;
+    height: 50px;
     padding: 11px 45px 11px 11px;
+    margin: 0;
     box-sizing: border-box;
 }
 
-.toggle-password {
+.password-wrapper .toggle-password {
     position: absolute;
     top: 50%;
     right: 14px;
@@ -430,8 +433,9 @@ table a:hover {
     font-size: 18px;
     color: #64748b;
     line-height: 1;
+    z-index: 5;
 }
 
-.toggle-password:hover {
+.password-wrapper .toggle-password:hover {
     color: #2563eb;
 }
