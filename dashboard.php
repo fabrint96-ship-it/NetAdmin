@@ -138,9 +138,39 @@ const serviciosValues = <?php echo json_encode($graficaServicios['values']); ?>;
 const incidenciasLabels = <?php echo json_encode($graficaIncidencias['labels']); ?>;
 const incidenciasValues = <?php echo json_encode($graficaIncidencias['values']); ?>;
 
-const chartOptions = {
+const doughnutOptions = {
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    scales: {},
+    plugins: {
+        legend: {
+            position: 'bottom',
+            labels: {
+                boxWidth: 12,
+                font: {
+                    size: 11
+                }
+            }
+        }
+    }
+};
+
+const barOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            display: false
+        }
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            ticks: {
+                precision: 0
+            }
+        }
+    }
 };
 
 new Chart(document.getElementById('chartEquipos'), {
@@ -151,7 +181,7 @@ new Chart(document.getElementById('chartEquipos'), {
             data: equiposValues
         }]
     },
-    options: chartOptions
+    options: doughnutOptions
 });
 
 new Chart(document.getElementById('chartServicios'), {
@@ -162,7 +192,7 @@ new Chart(document.getElementById('chartServicios'), {
             data: serviciosValues
         }]
     },
-    options: chartOptions
+    options: doughnutOptions
 });
 
 new Chart(document.getElementById('chartIncidencias'), {
@@ -174,7 +204,7 @@ new Chart(document.getElementById('chartIncidencias'), {
             data: incidenciasValues
         }]
     },
-    options: chartOptions
+    options: barOptions
 });
 </script>
 
