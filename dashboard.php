@@ -63,7 +63,7 @@ $graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
             <div class="card-icon">🖥️</div>
             <div class="card-content">
                 <h3>Equipos</h3>
-                <p><?php echo $totalEquipos; ?></p>
+                <p><?php echo limpiar($totalEquipos); ?></p>
             </div>
             <div class="card-arrow">›</div>
         </a>
@@ -72,7 +72,7 @@ $graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
             <div class="card-icon">🗄️</div>
             <div class="card-content">
                 <h3>Servicios</h3>
-                <p><?php echo $totalServicios; ?></p>
+                <p><?php echo limpiar($totalServicios); ?></p>
             </div>
             <div class="card-arrow">›</div>
         </a>
@@ -81,7 +81,7 @@ $graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
             <div class="card-icon">⚠️</div>
             <div class="card-content">
                 <h3>Incidencias</h3>
-                <p><?php echo $totalIncidencias; ?></p>
+                <p><?php echo limpiar($totalIncidencias); ?></p>
             </div>
             <div class="card-arrow">›</div>
         </a>
@@ -90,7 +90,7 @@ $graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
             <div class="card-icon">📄</div>
             <div class="card-content">
                 <h3>Logs</h3>
-                <p><?php echo $totalLogs; ?></p>
+                <p><?php echo limpiar($totalLogs); ?></p>
             </div>
             <div class="card-arrow">›</div>
         </a>
@@ -112,7 +112,7 @@ $graficaIncidencias = prepararDatosGrafica($incidenciasPrioridad, 'prioridad');
             </div>
         </div>
 
-        <div class="chart-card">
+        <div class="chart-card chart-card-wide">
             <h3>Incidencias por prioridad</h3>
             <div class="chart-box">
                 <canvas id="chartIncidencias"></canvas>
@@ -141,7 +141,7 @@ const incidenciasValues = <?php echo json_encode($graficaIncidencias['values']);
 const doughnutOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    scales: {},
+    cutout: '55%',
     plugins: {
         legend: {
             position: 'bottom',
