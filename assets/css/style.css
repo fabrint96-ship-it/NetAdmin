@@ -409,18 +409,21 @@ table a:hover {
     }
 }
 
-.password-box {
-    display: flex;
-    gap: 8px;
-    align-items: center;
+.password-wrapper {
+    position: relative;
+    width: 100%;
 }
 
-.password-box input {
-    flex: 1;
+.password-wrapper input {
+    padding-right: 45px;
 }
 
-.password-box button {
-    width: auto;
-    padding: 11px 14px;
-    margin: 8px 0;
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 18px;
 }

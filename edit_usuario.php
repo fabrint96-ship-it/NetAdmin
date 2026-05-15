@@ -28,9 +28,18 @@ if (!$usuario) {
 
         <input type="text" name="username" value="<?php echo limpiar($usuario['username']); ?>" required>
 
-        <div class="password-box">
-            <input type="password" name="password" id="editUserPassword" placeholder="Nueva contraseña opcional">
-            <button type="button" onclick="togglePassword('editUserPassword')">Mostrar</button>
+        <div class="password-wrapper">
+            <input
+                type="password"
+                name="password"
+                id="editUserPassword"
+                placeholder="Nueva contraseña opcional"
+            >
+
+            <span class="toggle-password"
+                onclick="togglePassword('editUserPassword', this)">
+                👁️
+            </span>
         </div>
 
         <select name="rol" required>

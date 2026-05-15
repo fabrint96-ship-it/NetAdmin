@@ -28,9 +28,19 @@ $usuarios = $pdo->query("SELECT id, username, rol, fecha_creacion FROM usuarios 
 
     <form action="add_usuario.php" method="POST" class="form-grid">
         <input type="text" name="username" placeholder="Nombre de usuario" required>
-        <div class="password-box">
-            <input type="password" name="password" id="newUserPassword" placeholder="Contraseña" required>
-            <button type="button" onclick="togglePassword('newUserPassword')">Mostrar</button>
+        <div class="password-wrapper">
+            <input
+                type="password"
+                name="password"
+                id="newUserPassword"
+                placeholder="Contraseña"
+                required
+            >
+
+            <span class="toggle-password"
+                onclick="togglePassword('newUserPassword', this)">
+                👁️
+            </span>
         </div>
 
         <select name="rol" required>
