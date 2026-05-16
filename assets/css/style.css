@@ -439,3 +439,7 @@ table a:hover {
 .password-wrapper .toggle-password:hover {
     color: #2563eb;
 }
+
+table td {
+    vertical-align: middle;
+}
