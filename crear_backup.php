@@ -3,64 +3,50 @@ require_once 'includes/auth.php';
 require_once __DIR__ . '/config/db.php';
 require_once 'includes/functions.php';
 
-$host = getenv('DB_HOST');
-$db = getenv('DB_NAME');
-$user = getenv('DB_USER');
-$password = getenv('DB_PASSWORD');
+bloquearSiNoEsAdmin();
 
-$fecha = date('Y-m-d_H-i-s');
+$databaseUrl = getenv("DATABASE_URL");
 
+if (!$databaseUrl) {
+    die("Error: DATABASE_URL no está configurada en Render.");
+}
+
+$backupDir = __DIR__ . "/backups";
+
+if (!is_dir($backupDir)) {
+    mkdir($backupDir, 0775, true);
+}
+
+$fecha = date("Y-m-d_H-i-s");
 $archivo = "backup_" . $fecha . ".sql";
+$ruta = $backupDir . "/" . $archivo;
 
-$ruta = __DIR__ . "/backups/" . $archivo;
+$comando = "pg_dump " . escapeshellarg($databaseUrl) . " -f " . escapeshellarg($ruta) . " 2>&1";
 
-/*
-|--------------------------------------------------------------------------
-| pg_dump
-|--------------------------------------------------------------------------
-*/
-
-$comando = "
-PGPASSWORD=\"$password\"
-pg_dump
--h $host
--U $user
--d $db
--f \"$ruta\"
-";
+$output = [];
+$resultado = 0;
 
 exec($comando, $output, $resultado);
 
-/*
-|--------------------------------------------------------------------------
-| Guardar registro
-|--------------------------------------------------------------------------
-*/
-
-if ($resultado === 0) {
-
+if ($resultado === 0 && file_exists($ruta)) {
     $stmt = $pdo->prepare("
-        INSERT INTO backups
-        (nombre_archivo, usuario)
-        VALUES (?, ?)
+        INSERT INTO backups (nombre_archivo, usuario)
+        VALUES (:nombre_archivo, :usuario)
     ");
 
     $stmt->execute([
-        $archivo,
-        $_SESSION['user']
+        ':nombre_archivo' => $archivo,
+        ':usuario' => usuarioActual()
     ]);
 
-    registrarLog(
-        $pdo,
-        $_SESSION['user'],
-        "Creó backup PostgreSQL: $archivo"
-    );
+    registrarLog($pdo, usuarioActual(), "Creó backup PostgreSQL: " . $archivo, "backups", null);
 
     header("Location: backups.php");
     exit;
-
-} else {
-
-    die("Error al crear el backup PostgreSQL");
-
 }
+
+echo "<h2>Error al crear el backup PostgreSQL</h2>";
+echo "<pre>";
+echo "Código resultado: " . $resultado . "\n\n";
+echo implode("\n", $output);
+echo "</pre>";
