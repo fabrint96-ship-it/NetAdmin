@@ -6,6 +6,7 @@ require_once 'includes/functions.php';
 if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
 
     die("Acceso denegado");
+}
 
 $backups = $pdo->query("
     SELECT *
