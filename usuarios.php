@@ -37,10 +37,7 @@ $usuarios = $pdo->query("SELECT id, username, rol, fecha_creacion FROM usuarios 
                 required
             >
 
-            <span class="toggle-password"
-                onclick="togglePassword('newUserPassword', this)">
-                👁️
-            </span>
+            <span class="toggle-password" onclick="togglePassword('newUserPassword', this)">👁️</span>
         </div>
 
         <select name="rol" required>

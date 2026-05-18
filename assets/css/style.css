@@ -433,3 +433,36 @@ table a:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* Mostrar / ocultar contraseña dentro del input */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 8px 0;
+}
+
+.password-wrapper input {
+    width: 100%;
+    height: 50px;
+    padding: 11px 45px 11px 11px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.password-wrapper .toggle-password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 18px;
+    color: #64748b;
+    line-height: 1;
+    z-index: 20;
+}
+
+.password-wrapper .toggle-password:hover {
+    color: #2563eb;
+}
