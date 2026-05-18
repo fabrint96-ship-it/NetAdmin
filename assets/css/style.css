@@ -69,6 +69,8 @@ body {
 .main {
     margin-left: 250px;
     padding: 32px;
+    width: calc(100% - 250px);
+    box-sizing: border-box;
 }
 
 .main h1 {
@@ -84,24 +86,14 @@ body {
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(2, 360px);
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 22px;
     margin-top: 30px;
-    align-items: start;
+    width: 100%;
 }
 
 .dashboard-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 22px;
-    min-height: 110px;
-    border-radius: 18px;
-    text-decoration: none;
-    color: #1e293b;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    transition: 0.25s;
-    box-sizing: border-box;
+    width: 100%;
 }
 
 .dashboard-card:hover {
@@ -204,10 +196,10 @@ body {
 
 .charts-grid {
     display: grid;
-    grid-template-columns: repeat(2, 360px);
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
     gap: 24px;
     margin-top: 30px;
-    align-items: start;
+    width: 100%;
 }
 
 .chart-card {
@@ -215,10 +207,20 @@ body {
     padding: 16px;
     border-radius: 16px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    width: 360px;
-    height: 300px;
+    min-height: 320px;
+    width: 100%;
     overflow: hidden;
     box-sizing: border-box;
+}
+
+.chart-card-wide {
+    grid-column: span 2;
+}
+
+.chart-box {
+    position: relative;
+    width: 100%;
+    height: 240px;
 }
 
 .chart-card-wide {
@@ -258,7 +260,7 @@ body {
     padding: 25px;
     border-radius: 18px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    width: 744px;
+    width: 100%;
     box-sizing: border-box;
 }
 
