@@ -302,3 +302,134 @@ table a:hover {
         grid-template-columns: 1fr;
     }
 }
+
+/* Corrección visual tarjetas dashboard */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.dashboard-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px;
+    min-height: 150px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #1e293b;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+    transition: 0.25s;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.13);
+}
+
+.card-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    flex-shrink: 0;
+}
+
+.card-content {
+    flex: 1;
+    margin-left: 22px;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 26px;
+    color: #1e293b;
+}
+
+.card-content p {
+    margin: 8px 0 0 0;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.card-arrow {
+    font-size: 48px;
+    opacity: 0.65;
+}
+
+.equipos-card {
+    background: #eef4ff;
+    border: 1px solid #bfd7ff;
+}
+
+.equipos-card .card-icon {
+    background: #2563eb;
+}
+
+.equipos-card .card-content p,
+.equipos-card .card-arrow {
+    color: #2563eb;
+}
+
+.servicios-card {
+    background: #edf9ee;
+    border: 1px solid #c5e8c8;
+}
+
+.servicios-card .card-icon {
+    background: #16a34a;
+}
+
+.servicios-card .card-content p,
+.servicios-card .card-arrow {
+    color: #16a34a;
+}
+
+.incidencias-card {
+    background: #fff8e7;
+    border: 1px solid #ffe39c;
+}
+
+.incidencias-card .card-icon {
+    background: #f59e0b;
+}
+
+.incidencias-card .card-content p,
+.incidencias-card .card-arrow {
+    color: #f59e0b;
+}
+
+.logs-card {
+    background: #f5efff;
+    border: 1px solid #dccbff;
+}
+
+.logs-card .card-icon {
+    background: #7c3aed;
+}
+
+.logs-card .card-content p,
+.logs-card .card-arrow {
+    color: #7c3aed;
+}
+
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
