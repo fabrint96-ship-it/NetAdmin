@@ -86,123 +86,39 @@ body {
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
     gap: 22px;
     margin-top: 30px;
     width: 100%;
 }
 
 .dashboard-card {
-    width: 100%;
-}
-
-.dashboard-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-}
-
-.card-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    flex-shrink: 0;
-}
-
-.card-content {
-    flex: 1;
-    margin-left: 20px;
-}
-
-.card-content h3 {
-    margin: 0;
-    font-size: 24px;
+    justify-content: space-between;
+    padding: 22px;
+    min-height: 120px;
+    border-radius: 18px;
     text-decoration: none;
     color: #1e293b;
-}
-
-.card-content p {
-    margin-top: 8px;
-    margin-bottom: 0;
-    font-size: 34px;
-    font-weight: bold;
-}
-
-.card-arrow {
-    font-size: 44px;
-    opacity: 0.6;
-}
-
-.equipos-card {
-    background: #eef4ff;
-    border: 1px solid #bfd7ff;
-}
-
-.equipos-card .card-icon {
-    background: #2563eb;
-}
-
-.equipos-card .card-content p,
-.equipos-card .card-arrow {
-    color: #2563eb;
-}
-
-.servicios-card {
-    background: #edf9ee;
-    border: 1px solid #c5e8c8;
-}
-
-.servicios-card .card-icon {
-    background: #16a34a;
-}
-
-.servicios-card .card-content p,
-.servicios-card .card-arrow {
-    color: #16a34a;
-}
-
-.incidencias-card {
-    background: #fff8e7;
-    border: 1px solid #ffe39c;
-}
-
-.incidencias-card .card-icon {
-    background: #f59e0b;
-}
-
-.incidencias-card .card-content p,
-.incidencias-card .card-arrow {
-    color: #f59e0b;
-}
-
-.logs-card {
-    background: #f5efff;
-    border: 1px solid #dccbff;
-}
-
-.logs-card .card-icon {
-    background: #7c3aed;
-}
-
-.logs-card .card-content p,
-.logs-card .card-arrow {
-    color: #7c3aed;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: 0.25s;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 /* Gráficas dashboard */
 
 .charts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
     gap: 24px;
     margin-top: 30px;
     width: 100%;
 }
 
-.chart-card {
+.chart-card,
+.chart-card-wide {
     background: #ffffff;
     padding: 16px;
     border-radius: 16px;
@@ -211,21 +127,7 @@ body {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
-}
-
-.chart-card-wide {
-    grid-column: span 2;
-}
-
-.chart-box {
-    position: relative;
-    width: 100%;
-    height: 240px;
-}
-
-.chart-card-wide {
-    width: 744px;
-    grid-column: span 2;
+    grid-column: auto;
 }
 
 .chart-card h3 {
@@ -234,16 +136,12 @@ body {
     font-size: 16px;
 }
 
-.chart-box {
-    position: relative;
-    width: 328px;
-    height: 230px;
-    margin: 0 auto;
-}
-
+.chart-box,
 .chart-card-wide .chart-box {
-    width: 700px;
-    height: 230px;
+    position: relative;
+    width: 100%;
+    height: 240px;
+    margin: 0;
 }
 
 .chart-box canvas {
@@ -377,29 +275,17 @@ table a:hover {
 
 /* Responsive */
 
-@media (max-width: 1100px) {
-    .dashboard-grid,
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
+    }
+
     .charts-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .dashboard-card,
-    .chart-card,
-    .chart-card-wide,
-    .info-panel {
-        width: 100%;
-        max-width: 360px;
-        grid-column: span 1;
-    }
-
-    .chart-box,
-    .chart-card-wide .chart-box {
-        width: 100%;
-        height: 230px;
+        grid-template-columns: repeat(2, minmax(300px, 1fr));
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
     .sidebar {
         position: relative;
         width: 100%;
@@ -408,40 +294,11 @@ table a:hover {
 
     .main {
         margin-left: 0;
+        width: 100%;
     }
-}
 
-.password-wrapper {
-    position: relative;
-    width: 100%;
-    margin: 8px 0;
-}
-
-.password-wrapper input {
-    width: 100%;
-    height: 50px;
-    padding: 11px 45px 11px 11px;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-.password-wrapper .toggle-password {
-    position: absolute;
-    top: 50%;
-    right: 14px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    user-select: none;
-    font-size: 18px;
-    color: #64748b;
-    line-height: 1;
-    z-index: 5;
-}
-
-.password-wrapper .toggle-password:hover {
-    color: #2563eb;
-}
-
-table td {
-    vertical-align: middle;
+    .dashboard-grid,
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
 }
